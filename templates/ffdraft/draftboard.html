@@ -1,0 +1,46 @@
+
+{% extends 'ffdraft/base.html' %}
+
+{% block content %}
+<meta http-equiv="refresh" content="10" />
+<a href="{% url 'fullboard' %}"><button type="button" class="btn btn-outline-primary btn-rounded mb-4" style="float: right;">Full Draft List</button></a>
+<table style="background:WhiteSmoke !important"class="table"border="1" width="600">
+    <thead>
+  <tr>
+      <th>Round</th>
+      <th>Team</th>
+      <th>Player</th>
+      <th>Select</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for draft in drafted %}
+      <tr class="table-danger">
+        <tr>
+          <td>{{ draft.draft_round }}</td>
+          <td>{{ draft.draft_team }}</td>
+          <td>{{ draft.player }}</td>
+        </tr>
+      </tr>
+  {% endfor %}
+  {% for draft in drafttable %}
+  {% if forloop.first %}
+      <tr class="table-primary">
+          <td>{{ draft.draft_round }}</td>
+          <td>{{ draft.draft_team }}</td>
+          <td>{{ draft.player }}</td>
+          <td><a href="{% url 'update_draft' draft.id %}"><button type="button" class="btn btn-primary btn-block">Draft</button></a></td>
+      </tr>
+  {% else %}
+      <tr>
+          <td>{{ draft.draft_round }}</td>
+          <td>{{ draft.draft_team }}</td>
+          <td>{{ draft.player }}</td>
+      </tr>
+  {% endif %}
+  </tbody>
+{% endfor %}
+</table>
+
+{% endblock %}
+

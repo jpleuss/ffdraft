@@ -1,0 +1,24 @@
+{% extends 'ffdraft/base.html' %}
+{% block content %}
+<table style="background:WhiteSmoke !important"class="table"border="1" width="600">
+  <thead>
+  <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Position</th>
+      <th>bye</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for player in table %}
+      <tr>
+          <td>{{ player.rk }}</td>
+          <td>{{ player.name }}</td>
+          <td>{{ player.pos }}</td>
+          <td>{{ player.bye }}</td>
+      </tr>
+  </tbody>
+{% endfor %}
+</table>
+
+{% endblock %}

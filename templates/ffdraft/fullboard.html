@@ -1,0 +1,26 @@
+{% extends 'ffdraft/base.html' %}
+
+{% block content %}
+        <table style="background:WhiteSmoke !important"class="table"border="1" width="600">
+            <thead>
+          <tr>
+              <th>Round</th>
+              <th>Team</th>
+              <th>Player</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for draft in drafttable %}
+              <tr>
+                  <td>{{ draft.draft_round }}</td>
+                  <td>{{ draft.draft_team }}</td>
+                  <td>{{ draft.player }}</td>
+                  {% if user.is_staff %}
+                  <td><a href="{% url 'update_draft' draft.id %}">class="btn btn-primary btn-block"</a>Draft</td>
+                  {% endif %}
+              </tr>
+          </tbody>
+        {% endfor %}
+        </table>
+
+{% endblock %}

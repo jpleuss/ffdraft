@@ -1,0 +1,77 @@
+ {% load static %}
+
+<html lang="en">
+  <head>
+      <title>FFDraft</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      {% block script %}
+      {% endblock %}
+
+  </head>
+
+<body>
+   <div class="container">
+    <div style="background:transparent !important" class="jumbotron">
+      <h1>Fantasy Football Draft</h1>
+      <p>Pleuss Family Fantasy Football League 2019: PPR League with 2 QBs.</p>
+        <div class="content-section">
+          {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-secondary btn-rounded mb-4" style="float: right;">Log out</button></a>
+          {% else %}
+            <a href="{% url 'login' %}"><button type="button" class="btn btn-primary btn-rounded mb-4" style="float: right;">Sign in</button></a>
+          {% endif %}
+        </div>
+
+        <div class="btn-group">
+            <a href="{% url 'draftboard' %}"><button type="button" class="btn btn-outline-primary">Draftboard</button></a>
+           <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">Available Players</button>
+                <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'player_list' %}">All Available</a>
+                <a class="dropdown-item" href="/position/RB">Available RB</a>
+                <a class="dropdown-item" href="/position/WR">Available WR</a>
+                <a class="dropdown-item" href="/position/QB">Available QB</a>
+                <a class="dropdown-item" href="/position/TE">Available TE</a>
+                <a class="dropdown-item" href="/position/DST">Available DST</a>
+                <a class="dropdown-item" href="/position/K">Available K</a>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">Teams</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/teams/Jeff">Jeff</a>
+                    <a class="dropdown-item" href="/teams/Dad">Dad</a>
+                    <a class="dropdown-item" href="/teams/Chris">Chris</a>
+                    <a class="dropdown-item" href="/teams/Jim">Jim</a>
+                    <a class="dropdown-item" href="/teams/Laura">Laura</a>
+                    <a class="dropdown-item" href="/teams/Joe">Joe</a>
+                    <a class="dropdown-item" href="/teams/David">David</a>
+                    <a class="dropdown-item" href="/teams/Luke">Luke</a>
+                </div>
+            </div>
+    </div>
+
+    </div>
+   </div>
+   <div id="Body" class="container" style="height: 800px;">
+       <div class="row">
+           {% if messages %}
+             {% for message in messages %}
+               <div class="alert alert-{{ message.tags }}">
+                   {{ message }}
+               </div>
+             {% endfor %}
+           {% endif %}
+           {% block content %}{% endblock %}
+       </div>
+   </div>
+   </div>
+</body>
+{% block footer %}
+{% endblock %}
+</html>
+
